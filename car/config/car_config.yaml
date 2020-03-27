@@ -1,0 +1,31 @@
+controller:
+# controls the rear two tires based on individual motors
+  # Publish all joint states -----------------------------------
+  joint_state:
+    type: joint_state_controller/JointStateController
+    publish_rate: 50  
+  rear_right_velocity:
+    type: velocity_controllers/JointVelocityController
+    joint: rear_right_wheel_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  rear_left_velocity:
+    type: velocity_controllers/JointVelocityController
+    joint: rear_left_wheel_joint
+    pid: {p: 100.0, i: 0.01, d: 10.0}
+  front_right_steering:
+    type: effort_controllers/JointPositionController
+    joint: front_right_steering_joint
+    pid: {p: 40000.0, i: 200.0, d: 1.0}    
+  front_left_steering:
+    type: effort_controllers/JointPositionController
+    joint: front_left_steering_joint
+    pid: {p: 40000.0, i: 200.0, d: 1.0}
+  number_steering:
+    type: effort_controllers/JointPositionController
+    joint: number_joint
+    pid: {p: 400.0, i: 0.01, d: 1.0}
+# Resolve the following error
+# [ERROR]No p gain specified for pid. Namespace: /gazebo_ros_control/pid_gains/back_right_wheel_joint    
+  gazebo_ros_control/pid_gains:
+    rear_right_wheel_joint: {p: 100.0, i: 0.01, d: 10.0}
+    rear_left_wheel_joint: {p: 100.0, i: 0.01, d: 10.0}

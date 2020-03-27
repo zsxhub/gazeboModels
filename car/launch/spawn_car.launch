@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+
+	<arg name="gui" default="true"/>
+  	<arg name="debug" default="false"/>
+    <arg name="verbose" default="false"/>
+    <arg name="paused" default="false"/>
+    <arg name="respawn_gazebo" default="false"/>
+    <arg name="world" default="$(find car)/worlds/myworld.world"/>
+
+    <arg name="R" value="0"/>
+    <arg name="P" value="0"/>
+    <arg name="Y" value="0.06981317"/>
+    <!--<arg name="Y" value="0"/>-->
+    <include file="$(find gazebo_ros)/launch/empty_world.launch">
+        <arg name="gui" value="$(arg gui)"/>
+        <arg name="debug" value="$(arg debug)"/>
+        <arg name="verbose" value="$(arg verbose)"/>
+        <arg name="paused" value="$(arg paused)"/>
+        <arg name="respawn_gazebo" value="$(arg respawn_gazebo)"/>
+        <arg name="world_name" value="$(arg world)"/>
+    </include>
+    
+    <group ns="car1">
+        <include file="$(find car)/launch/single_car_spawn.launch">
+            <arg name="x" value="0.0"/>
+            <arg name="y" value="0.0"/>
+            <arg name="z" value="0.0"/>
+            <arg name="R" value="$(arg R)"/>
+            <arg name="P" value="$(arg P)"/>
+            <arg name="Y" value="$(arg Y)"/>
+
+            <arg name="robot_name" value="car"/>
+            <arg name="ID" value="1"/>
+            <arg name="namespace" value="car1"/>
+        </include>
+    </group>
+    <group ns="car2">
+        <include file="$(find car)/launch/single_car_spawn.launch">
+            <arg name="x" value="5.0"/>
+            <arg name="y" value="0.0"/>
+            <arg name="z" value="0.0"/>
+            <arg name="R" value="$(arg R)"/>
+            <arg name="P" value="$(arg P)"/>
+            <arg name="Y" value="$(arg Y)"/>
+            <arg name="robot_name" value="car"/>
+            <arg name="ID" value="2"/>
+            <arg name="namespace" value="car2"/>
+        </include>
+    </group>
+
+    <group ns="car3">
+        <include file="$(find car)/launch/single_car_spawn.launch">
+            <arg name="x" value="9.97"/>
+            <arg name="y" value="0.7"/>
+            <arg name="z" value="0.0"/>
+            <arg name="R" value="$(arg R)"/>
+            <arg name="P" value="$(arg P)"/>
+            <arg name="Y" value="$(arg Y)"/>
+            <arg name="robot_name" value="car"/>
+            <arg name="ID" value="3"/>
+            <arg name="namespace" value="car3"/>
+        </include>
+    </group>
+
+</launch>
